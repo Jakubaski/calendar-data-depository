@@ -1,0 +1,45 @@
+/* Styling for the application */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background: #0073e6;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+main {
+  padding: 1em;
+}
+
+fieldset {
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+form label {
+  display: block;
+  margin-top: 0.5em;
+}
+
+form input, form select {
+  width: 100%;
+  padding: 0.5em;
+  margin-top: 0.3em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 0.5em;
+}
