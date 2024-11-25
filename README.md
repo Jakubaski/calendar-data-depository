@@ -34,7 +34,3 @@ This project is a web application that serves as a data depository for early mod
 1. Visit the website hosted via GitHub Pages: [Live Demo](https://<your-username>.github.io/<repository-name>/)
 2. Input data into the provided fields.
 3. View organized sections and data visualizations.
-
-## Setup Instructions
-To set up locally:
-1. Clone the repository:
