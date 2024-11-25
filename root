@@ -1,5 +1,0 @@
-/ (root)
-├── index.html        (The main HTML file for the site)
-├── style.css         (Optional: CSS file for styling)
-├── script.js         (Optional: JavaScript file for interactivity)
-├── README.md         (Information about your project)
