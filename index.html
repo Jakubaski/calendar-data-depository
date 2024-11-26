@@ -1,111 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Early Modern Calendar Depository</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- For Pie Chart -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Modern Calendars</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
 </head>
 <body>
-  <header>
-    <h1>Early Modern Calendar Depository</h1>
-  </header>
-  <main>
-    <section id="form-section">
-      <h2>Add Calendar Data</h2>
-      <form id="data-form">
-        <!-- Collection Information -->
-        <fieldset>
-          <legend>Collection Information</legend>
-          <label for="archive-city">Archive City:</label>
-          <input type="text" id="archive-city" required>
-          <label for="archive">Archive:</label>
-          <input type="text" id="archive" required>
-          <label for="signature">Signature:</label>
-          <input type="text" id="signature" required>
-          <label for="skrzynka">Skrzynka nr.:</label>
-          <input type="text" id="skrzynka" required>
-          <label for="karta">Karta nr.:</label>
-          <input type="text" id="karta" required>
-          <label for="vols">Vols:</label>
-          <input type="text" id="vols" required>
-        </fieldset>
+    <h1>Early Modern Calendars Depository</h1>
+    <p>Paste data from Microsoft Excel into the table below. The data will be processed and visualized automatically.</p>
 
-        <!-- Publication Information -->
-        <fieldset>
-          <legend>Publication Information</legend>
-          <label for="year">Year:</label>
-          <input type="text" id="year" required>
-          <label for="name">Name:</label>
-          <input type="text" id="name" required>
-          <label for="author">Author:</label>
-          <input type="text" id="author" required>
-          <label for="printing-location">Printing Location:</label>
-          <input type="text" id="printing-location" required>
-        </fieldset>
+    <!-- Table for Pasting Data -->
+    <textarea id="dataInput" placeholder="Paste your Excel data here..." rows="10" style="width: 100%;"></textarea>
+    <button id="processData">Process Data</button>
 
-        <!-- Research Status -->
-        <fieldset>
-          <legend>Research Status</legend>
-          <label for="annotations">Annotations:</label>
-          <select id="annotations">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-          <label for="annotation-category">Annotation Category:</label>
-          <input type="text" id="annotation-category" required>
-          <label for="photos">Photos:</label>
-          <select id="photos">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-          <label for="seen">Seen:</label>
-          <select id="seen">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-          <label for="online">Online:</label>
-          <select id="online">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </fieldset>
+    <!-- Display Area for Pie Charts -->
+    <div id="charts">
+        <h2>Visualization of Data</h2>
+        <canvas id="cityChart"></canvas>
+        <canvas id="printingLocationChart"></canvas>
+        <canvas id="annotationsChart"></canvas>
+        <canvas id="annotationCategoryChart"></canvas>
+    </div>
 
-        <button type="submit">Save Entry</button>
-      </form>
-    </section>
-
-    <section id="data-section">
-      <h2>Stored Calendar Data</h2>
-      <table id="data-table">
-        <thead>
-          <tr>
-            <th>Archive City</th>
-            <th>Signature</th>
-            <th>Skrzynka nr.</th>
-            <th>Karta nr.</th>
-            <th>Vols</th>
-            <th>Year</th>
-            <th>Name</th>
-            <th>Author</th>
-            <th>Printing Location</th>
-            <th>Annotations</th>
-            <th>Annotation Category</th>
-            <th>Photos</th>
-            <th>Seen</th>
-            <th>Online</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-
-    <section id="chart-section">
-      <h2>Annotation Categories</h2>
-      <canvas id="annotation-chart"></canvas>
-    </section>
-  </main>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
