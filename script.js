@@ -1,42 +1,74 @@
-const form = document.getElementById('data-form');
-const tableBody = document.querySelector('#data-table tbody');
-const chartCanvas = document.getElementById('annotation-chart');
-let dataEntries = [];
+document.getElementById("processData").addEventListener("click", function () {
+    const rawData = document.getElementById("dataInput").value;
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
+    // Parse data (assuming tab-separated from Excel)
+    const rows = rawData.split("\n").map(row => row.split("\t"));
 
-  const formData = {
-    archiveCity: document.getElementById('archive-city').value,
-    signature: document.getElementById('signature').value,
-    skrzynka: document.getElementById('skrzynka').value,
-    karta: document.getElementById('karta').value,
-    vols: document.getElementById('vols').value,
-    year: document.getElementById('year').value,
-    name: document.getElementById('name').value,
-    author: document.getElementById('author').value,
-    printingLocation: document.getElementById('printing-location').value,
-    annotations: document.getElementById('annotations').value,
-    annotationCategory: document.getElementById('annotation-category').value,
-    photos: document.getElementById('photos').value,
-    seen: document.getElementById('seen').value,
-    online: document.getElementById('online').value,
-  };
+    // Define categories
+    const categories = {
+        cities: {},
+        printingLocations: {},
+        annotations: { Yes: 0, No: 0 },
+        annotationCategories: {}
+    };
 
-  dataEntries.push(formData);
-  updateTable();
-  form.reset();
+    // Skip the first row (headers)
+    rows.slice(1).forEach(row => {
+        const [
+            archiveCity, signature, skrzynkaNr, kartaNr, vols, year, name, author,
+            printingLocation, annotations, annotationCategory, photos, seen, online
+        ] = row;
+
+        // Count by city
+        if (archiveCity) {
+            categories.cities[archiveCity] = (categories.cities[archiveCity] || 0) + 1;
+        }
+
+        // Count by printing location
+        if (printingLocation) {
+            categories.printingLocations[printingLocation] = (categories.printingLocations[printingLocation] || 0) + 1;
+        }
+
+        // Count annotations
+        if (annotations) {
+            categories.annotations[annotations] = (categories.annotations[annotations] || 0) + 1;
+        }
+
+        // Count annotation categories
+        if (annotationCategory) {
+            categories.annotationCategories[annotationCategory] =
+                (categories.annotationCategories[annotationCategory] || 0) + 1;
+        }
+    });
+
+    // Create Charts
+    createPieChart("cityChart", "Calendars by City", categories.cities);
+    createPieChart("printingLocationChart", "Calendars by Printing Location", categories.printingLocations);
+    createPieChart("annotationsChart", "Annotations (Yes/No)", categories.annotations);
+    createPieChart("annotationCategoryChart", "Annotation Categories", categories.annotationCategories);
 });
 
-function updateTable() {
-  tableBody.innerHTML = '';
-  dataEntries.forEach((entry) => {
-    const row = document.createElement('tr');
-    for (const key in entry) {
-      const cell = document.createElement('td');
-      cell.textContent = entry[key];
-      row.appendChild(cell);
-    }
-    tableBody.appendChild(row);
-  });
+function createPieChart(chartId, title, data) {
+    const ctx = document.getElementById(chartId).getContext("2d");
+    const labels = Object.keys(data);
+    const values = Object.values(data);
+
+    new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: title,
+                data: values,
+                backgroundColor: ["#ff6384", "#36a2eb", "#cc65fe", "#ffce56", "#4bc0c0", "#9966ff"],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: "top" },
+                title: { display: true, text: title }
+            }
+        }
+    });
 }
