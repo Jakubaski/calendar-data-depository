@@ -11,6 +11,7 @@ form.addEventListener("submit", (event) => {
 
     // Get form data
     const entry = {
+        archive: document.getElementById("archive").value,
         archiveCity: document.getElementById("archiveCity").value,
         signature: document.getElementById("signature").value,
         skrzynkaNr: document.getElementById("skrzynkaNr").value,
@@ -55,12 +56,16 @@ function addRowToTable(entry) {
 function updateCharts() {
     const categories = {
         cities: {},
+        archives: {},
         printingLocations: {},
         annotations: { Yes: 0, No: 0 },
         annotationCategories: {},
     };
 
     dataEntries.forEach((entry) => {
+        // Count by archive
+        categories.archives[entry.archive] = (categories.archives[entry.archive] || 0) + 1;
+
         // Count by city
         categories.cities[entry.archiveCity] = (categories.cities[entry.archiveCity] || 0) + 1;
 
