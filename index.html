@@ -3,21 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Early Modern Calendars</title>
+    <title>Early Modern Calendars Depository</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>Early Modern Calendars Depository</h1>
-    <p>Paste data from Microsoft Excel into the table below. The data will be processed and visualized automatically.</p>
+    <p>Enter the data below using the form. The data will appear in a dynamic table and can be visualized as pie charts.</p>
 
-    <!-- Table for Pasting Data -->
-    <textarea id="dataInput" placeholder="Paste your Excel data here..." rows="10" style="width: 100%;"></textarea>
-    <button id="processData">Process Data</button>
+    <!-- Input Form -->
+    <form id="dataForm">
+        <fieldset>
+            <legend>Collection Information</legend>
+            <input type="text" id="archiveCity" placeholder="Archive City" required>
+            <input type="text" id="signature" placeholder="Signature" required>
+            <input type="text" id="skrzynkaNr" placeholder="Skrzynka Nr.">
+            <input type="text" id="kartaNr" placeholder="Karta Nr.">
+            <input type="text" id="vols" placeholder="Vols">
+            <input type="number" id="year" placeholder="Year">
+        </fieldset>
 
-    <!-- Display Area for Pie Charts -->
+        <fieldset>
+            <legend>Publication Information</legend>
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="author" placeholder="Author">
+            <input type="text" id="printingLocation" placeholder="Printing Location">
+        </fieldset>
+
+        <fieldset>
+            <legend>Research Status</legend>
+            <select id="annotations">
+                <option value="Yes">Annotations: Yes</option>
+                <option value="No">Annotations: No</option>
+            </select>
+            <input type="text" id="annotationCategory" placeholder="Annotation Category">
+            <select id="photos">
+                <option value="Yes">Photos: Yes</option>
+                <option value="No">Photos: No</option>
+            </select>
+            <select id="seen">
+                <option value="Yes">Seen: Yes</option>
+                <option value="No">Seen: No</option>
+            </select>
+            <select id="online">
+                <option value="Yes">Online: Yes</option>
+                <option value="No">Online: No</option>
+            </select>
+        </fieldset>
+
+        <button type="submit">Add Entry</button>
+    </form>
+
+    <!-- Dynamic Table -->
+    <h2>Data Table</h2>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Archive City</th>
+                <th>Signature</th>
+                <th>Skrzynka Nr.</th>
+                <th>Karta Nr.</th>
+                <th>Vols</th>
+                <th>Year</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Printing Location</th>
+                <th>Annotations</th>
+                <th>Annotation Category</th>
+                <th>Photos</th>
+                <th>Seen</th>
+                <th>Online</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <!-- Charts Section -->
+    <h2>Data Visualizations</h2>
     <div id="charts">
-        <h2>Visualization of Data</h2>
         <canvas id="cityChart"></canvas>
         <canvas id="printingLocationChart"></canvas>
         <canvas id="annotationsChart"></canvas>
